@@ -171,4 +171,4 @@ python scripts/sync_resume_provider.py \
 - CLI 历史和 `/resume` 不丢
 - VSCode/App 对话保持隔离
 
-这个 Skill 本质上是一次 Codex 多模型切换踩坑记录的工程化版本。后续国产 API 适配会持续补充。
+后续国产 API 适配会持续补充。
