@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.log
+.deepseek_api_key
+config.local.yml

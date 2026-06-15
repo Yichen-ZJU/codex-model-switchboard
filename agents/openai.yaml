@@ -1,0 +1,7 @@
+interface:
+  display_name: "Codex Model Switchboard"
+  short_description: "Switch Codex models with shared CLI /resume history"
+  icon_small: "./assets/icon.svg"
+  icon_large: "./assets/icon.svg"
+  brand_color: "#0EA5E9"
+  default_prompt: "Use $codex-model-switchboard to configure Codex CLI model switching with shared terminal /resume history."

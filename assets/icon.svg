@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Codex Moon Bridge DeepSeek Shared Memory</title>
+  <desc id="desc">A bridge connecting two terminal memories.</desc>
+  <defs>
+    <linearGradient id="bg" x1="24" y1="24" x2="232" y2="232" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="0.48" stop-color="#0ea5e9"/>
+      <stop offset="1" stop-color="#22c55e"/>
+    </linearGradient>
+    <linearGradient id="bridge" x1="56" y1="138" x2="200" y2="138" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e0f2fe"/>
+      <stop offset="1" stop-color="#dcfce7"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="224" height="224" rx="44" fill="url(#bg)"/>
+  <circle cx="78" cy="104" r="28" fill="#eff6ff" opacity="0.96"/>
+  <circle cx="178" cy="104" r="28" fill="#ecfdf5" opacity="0.96"/>
+  <path d="M66 150c20-30 44-45 62-45s42 15 62 45" fill="none" stroke="url(#bridge)" stroke-width="18" stroke-linecap="round"/>
+  <path d="M58 170h140" fill="none" stroke="#f8fafc" stroke-width="14" stroke-linecap="round" opacity="0.92"/>
+  <path d="M82 170v-24M128 170v-42M174 170v-24" fill="none" stroke="#f8fafc" stroke-width="10" stroke-linecap="round" opacity="0.86"/>
+  <path d="M78 96h100" fill="none" stroke="#0f172a" stroke-width="10" stroke-linecap="round" opacity="0.76"/>
+  <path d="M94 82l-16 14 16 14M162 82l16 14-16 14" fill="none" stroke="#0f172a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity="0.76"/>
+  <circle cx="128" cy="204" r="8" fill="#f8fafc"/>
+  <circle cx="102" cy="204" r="5" fill="#dbeafe"/>
+  <circle cx="154" cy="204" r="5" fill="#dcfce7"/>
+</svg>
