@@ -6,7 +6,6 @@
 
 一个用于 Codex CLI 的多模型切换 Skill：支持在官方 OpenAI/GPT Codex 与第三方模型 provider 之间切换，并保持终端 `/resume` 历史共享。
 
-这个项目最早是为 DeepSeek via Moon Bridge 做的 fallback 方案，后来又验证了小米 MiMo v2.5 Pro 的 OpenAI-compatible Chat Completions 接口。核心机制并不绑定某一家模型厂商：只要 Codex 能通过桥接层或代理层启动某个 provider/model，就可以用这套方法共享 CLI 历史。
 
 ## 已验证 Provider
 
@@ -18,14 +17,15 @@ GLM、Qwen、Kimi、内部 OpenAI-compatible API 等其他国产或自建 API，
 
 ## 它解决什么问题
 
-很多 Codex CLI 用户会遇到：
+DeepSeek 官方的 Codex CLI 接入指南推荐通过 Moon Bridge 桥接。照做之后确实能在 Codex 里跑 DeepSeek，但问题很快出现：当你想切回官方 GPT 时，之前在 DeepSeek 下的对话历史全部从 `/resume` 里消失；再切回去，GPT 的对话也找不到了。两个 provider 各管各的记忆，手动复制 `history.jsonl` 根本解决不了。
 
-- 官方 GPT-5 / GPT-5.5 Codex 配额快用完，需要切备用模型。
-- 第三方 API 能跑，但和官方 Codex 的对话历史完全分离。
-- 复制 `history.jsonl`、`session_index.jsonl` 后，`/resume` 还是只显示一条。
-- 希望 CLI 共享历史，但不想把 VSCode / App 里的同伴对话混进来。
+这不是 DeepSeek 的问题，也不是 Moon Bridge 的问题。这是 Codex `/resume` 的底层机制决定的：它不只看 `history.jsonl`，还同时读取 SQLite 里的 threads 表和 rollout transcript 的 `session_meta` 元数据，甚至会在启动时反向回填覆盖你的手动修改。换句话说，只改一个层面是徒劳的。
 
-这个 Skill 把流程固化成：**一个终端专用 `CODEX_HOME`，多个 provider 启动入口，同一批 CLI `/resume` 历史，VSCode/App 默认隔离。**
+这个 Skill 把这些坑全部填平。核心思路是：**一个终端专用 `CODEX_HOME`，多个 provider 启动入口，同一批 CLI `/resume` 历史，VSCode/App 默认隔离。**
+
+你在 GPT 下创建的对话，切到 DeepSeek 后 `/resume` 看得到；在 DeepSeek 下创建的对话，切回 GPT 后 `/resume` 同样看得到。不用手动复制文件，不用操心 SQLite 被覆盖，sync 脚本在启动 provider 前自动搞定一切。
+
+这套机制不绑定特定模型厂商。最早为 DeepSeek via Moon Bridge 开发，后来验证了小米 MiMo v2.5 Pro。GLM、Qwen、Kimi、内部自建 API 等只要能通过 Moon Bridge、LiteLLM、OpenAI-compatible proxy 暴露成 Codex 可启动的 provider/model，都可以直接复用同一套流程。
 
 ## 关键发现
 

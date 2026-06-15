@@ -8,7 +8,6 @@
 
 A Codex skill for switching between official OpenAI Codex models and third-party model providers through bridge/proxy layers while keeping terminal `/resume` history shared across providers.
 
-This repository was first built for DeepSeek via Moon Bridge, then validated with Xiaomi MiMo v2.5 Pro through an OpenAI-compatible Chat Completions endpoint. The resume-sharing mechanism is provider-agnostic: it works whenever Codex can launch a provider/model pair and the provider is reachable through a Codex-compatible adapter such as Moon Bridge.
 
 ## Tested Providers
 
@@ -20,14 +19,20 @@ Other providers such as GLM, Qwen, Kimi, or internal OpenAI-compatible APIs shou
 
 ## Why This Exists
 
-Codex `/resume` is not backed only by `history.jsonl`.
+DeepSeek's official recommendation for Codex CLI users is to connect through Moon Bridge. That guide gets you a working DeepSeek model inside Codex, which is half the battle. The other half is what happens when you switch back to the official GPT provider: your DeepSeek conversations vanish from `/resume`. Switch again and your GPT conversations are gone. Each provider sees only its own history, and manually copying `history.jsonl` does not fix it.
+
+This is not a DeepSeek or Moon Bridge bug. It is a deeper problem with how Codex resolves resumable history. Codex `/resume` is not backed only by `history.jsonl`.
 
 It also depends on:
 
 - `state_*.sqlite`, especially the `threads` table.
 - The first `session_meta` line in `sessions/**/rollout-*.jsonl`.
 
-Codex can rebuild SQLite thread metadata from rollout transcripts. Updating only `history.jsonl` or only SQLite is not enough. To make the same terminal history visible under different providers, both SQLite and rollout `session_meta.model_provider` must be synchronized.
+Codex can rebuild SQLite thread metadata from rollout transcripts. Updating only `history.jsonl` or only SQLite is not enough: Codex will overwrite your changes on the next launch. To make the same terminal history visible under different providers, both SQLite and rollout `session_meta.model_provider` must be synchronized.
+
+This skill automates that synchronization. The result: you can switch between OpenAI GPT and any bridge-backed provider and pick up the same conversation right where you left off, with `/resume` listing all terminal sessions regardless of which provider they were created under. VSCode and App conversations stay in their own silo by default.
+
+The mechanism is provider-agnostic. It was first built for DeepSeek via Moon Bridge and later validated with Xiaomi MiMo v2.5 Pro. Any provider reachable through a Codex-compatible adapter (Moon Bridge, LiteLLM, OpenAI-compatible proxy) should follow the same pattern.
 
 ## What It Provides
 
