@@ -65,7 +65,6 @@ Use $codex-model-switchboard to configure Codex CLI model switching with shared 
 
 ## Safety Notes
 
-- Do not commit API keys, bearer tokens, or local provider config files.
 - Keep VSCode/App Codex separate unless you explicitly want shared history.
 - Back up Codex homes before merging or rewriting provider metadata.
 - Do not name a custom provider `openai`; Codex reserves built-in provider IDs.
