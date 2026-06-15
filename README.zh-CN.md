@@ -157,7 +157,6 @@ python scripts/sync_resume_provider.py \
 
 ## 安全提醒
 
-- 不要把 DeepSeek API Key、OpenAI Key、小米 token 或任何 token 提交进仓库。
 - 不要把自定义 provider 命名为 `openai`，这是 Codex 内置保留名。
 - 不建议全局设置 `model_catalog_json`，否则可能影响官方 GPT 模型列表。
 - 修改 Codex home 前先备份，尤其是 `state_*.sqlite` 和 `sessions/`。
