@@ -27,6 +27,8 @@ Validated examples include DeepSeek V4 through Moon Bridge and Xiaomi MiMo v2.5 
 
 ## Implementation Workflow
 
+For a first-time DeepSeek/Moon Bridge setup, read `references/moon-bridge-setup.md` before editing configs. For an existing Codex/Moon Bridge setup, use the shorter workflow below.
+
 1. Choose a canonical terminal Codex home, for example:
 
    ```bash
@@ -148,4 +150,5 @@ CODEX_HOME="$CODEX_HOME" codex -m moonbridge \
 
 - `scripts/merge_codex_homes.py`: merge CLI history/session/thread records from multiple `CODEX_HOME` directories into one canonical home, excluding VSCode by default.
 - `scripts/sync_resume_provider.py`: rewrite both SQLite thread metadata and rollout `session_meta.model_provider` so `/resume` works under the selected provider.
+- `references/moon-bridge-setup.md`: first-time Moon Bridge + DeepSeek setup, Codex config generation, validation, and troubleshooting.
 - `references/provider-notes.md`: compact notes for Moon Bridge, Codex config patterns, and provider examples.

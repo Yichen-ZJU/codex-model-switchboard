@@ -63,6 +63,8 @@ Use `scripts/sync_resume_provider.py` before launching the selected provider.
 
 ## Moon Bridge Provider Examples
 
+For full first-time installation and verification, see `moon-bridge-setup.md`.
+
 DeepSeek V4 is typically exposed through a Moon Bridge route using the Responses-compatible interface:
 
 ```yaml
