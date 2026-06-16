@@ -14,7 +14,7 @@ Set up multiple Codex CLI entry points that share one terminal-only `CODEX_HOME`
 - Every CLI entry point sees the same `/resume` list.
 - VSCode/App conversations stay isolated unless the user explicitly points them at the same `CODEX_HOME`.
 
-Validated examples include DeepSeek V4 through Moon Bridge and Xiaomi MiMo v2.5 Pro through Moon Bridge using `protocol: "openai-chat"`. Other OpenAI-compatible or bridge-supported providers should use the same pattern.
+Validated examples include DeepSeek V4 through Moon Bridge, Xiaomi MiMo v2.5 Pro through Moon Bridge using `protocol: "openai-chat"`, and MiniMax-M3 through Moon Bridge using `protocol: "openai-chat"`. Other OpenAI-compatible or bridge-supported providers should use the same pattern.
 
 ## Non-Negotiables
 
@@ -69,6 +69,15 @@ For a first-time DeepSeek/Moon Bridge setup, read `references/moon-bridge-setup.
      --model mimo-v2.5-pro
    ```
 
+   For MiniMax-M3:
+
+   ```bash
+   python scripts/sync_resume_provider.py \
+     --codex-home /path/to/codex-homes/cli \
+     --provider minimax \
+     --model minimax
+   ```
+
 ## Why `/resume` Often Still Shows One Session
 
 Codex `/resume` is not driven only by `history.jsonl` or `session_index.jsonl`.
@@ -120,6 +129,23 @@ routes:
   mimo:
     model: mimo-v2.5-pro
     provider: mimo
+```
+
+MiniMax-M3 uses the same `openai-chat` pattern:
+
+```yaml
+providers:
+  minimax:
+    base_url: "https://api.minimaxi.com/v1"
+    api_key: "replace-with-token"
+    protocol: "openai-chat"
+    offers:
+      - model: MiniMax-M3
+
+routes:
+  minimax:
+    model: MiniMax-M3
+    provider: minimax
 ```
 
 ## Diagnostics

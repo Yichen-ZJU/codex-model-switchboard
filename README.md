@@ -15,6 +15,7 @@ A Codex skill for switching between official OpenAI Codex models and third-party
 - Official OpenAI/GPT Codex provider.
 - DeepSeek V4 through Moon Bridge.
 - Xiaomi MiMo v2.5 Pro through Moon Bridge using `protocol: "openai-chat"`.
+- MiniMax-M3 through Moon Bridge using `protocol: "openai-chat"`.
 
 Other providers such as GLM, Qwen, Kimi, or internal OpenAI-compatible APIs should follow the same pattern when they expose a supported protocol (`openai-chat`, `openai-response`, `anthropic`, or another adapter supported by your bridge layer).
 

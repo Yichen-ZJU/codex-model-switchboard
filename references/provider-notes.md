@@ -98,4 +98,23 @@ routes:
     provider: mimo
 ```
 
+MiniMax-M3 has also been validated through an OpenAI Chat Completions-compatible endpoint:
+
+```yaml
+providers:
+  minimax:
+    base_url: "https://api.minimaxi.com/v1"
+    api_key: "replace-with-token"
+    protocol: "openai-chat"
+    offers:
+      - model: MiniMax-M3
+
+routes:
+  minimax:
+    model: MiniMax-M3
+    provider: minimax
+```
+
+MiniMax-M3 responses may include `<think>...</think>` text in the assistant output. If a downstream UI needs the final answer only, strip that block after generation.
+
 The same pattern should apply to GLM, Qwen, Kimi, and internal APIs when they expose an adapter protocol supported by the bridge layer.

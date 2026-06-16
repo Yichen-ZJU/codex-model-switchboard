@@ -13,6 +13,7 @@
 - 官方 OpenAI/GPT Codex provider
 - DeepSeek V4 via Moon Bridge
 - 小米 MiMo v2.5 Pro via Moon Bridge，使用 `protocol: "openai-chat"`
+- MiniMax-M3 via Moon Bridge，使用 `protocol: "openai-chat"`
 
 GLM、Qwen、Kimi、内部 OpenAI-compatible API 等其他国产或自建 API，也可以按同一模式继续适配。前提是它们能通过 Moon Bridge、LiteLLM、OpenAI-compatible proxy 或其他桥接层暴露成 Codex 可启动的 provider/model。
 
@@ -173,6 +174,36 @@ python scripts/sync_resume_provider.py \
   --provider mimo \
   --model mimo-v2.5-pro
 ```
+
+## MiniMax 示例
+
+MiniMax-M3 已验证可通过 OpenAI Chat Completions 兼容接口接入 Moon Bridge：
+
+```yaml
+providers:
+  minimax:
+    base_url: "https://api.minimaxi.com/v1"
+    api_key: "replace-with-token"
+    protocol: "openai-chat"
+    offers:
+      - model: MiniMax-M3
+
+routes:
+  minimax:
+    model: MiniMax-M3
+    provider: minimax
+```
+
+切换 `/resume` 可见性：
+
+```bash
+python scripts/sync_resume_provider.py \
+  --codex-home /path/to/codex-homes/cli \
+  --provider minimax \
+  --model minimax
+```
+
+注意：MiniMax-M3 的返回可能包含 `<think>...</think>` 片段，前端或后处理如果需要纯答案，可以再做过滤。
 
 ## 安全提醒
 
